@@ -13,6 +13,8 @@ import (
 	"github.com/antchfx/htmlquery"
 	readability "github.com/go-shiori/go-readability"
 	"github.com/gorilla/feeds"
+	"github.com/tdewolff/minify"
+	mhtml "github.com/tdewolff/minify/html"
 	"golang.org/x/net/html"
 )
 
@@ -124,8 +126,13 @@ func GetFullContent(config Config, link string) (fullContent string, err error) 
 		makeAllLinksAbsolute(baseURL, doc)
 
 		fullContent, err = doc.Html()
-		if err != nil {
-			return "", err
+		if err == nil {
+			m := minify.New()
+			m.AddFunc("text/html", mhtml.Minify)
+			fullContent, err = m.String("text/html", fullContent)
+			if err != nil {
+				return "", err
+			}
 		}
 	}
 
