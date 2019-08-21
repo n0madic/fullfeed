@@ -9,3 +9,11 @@ func InitContentCache(n int) (err error) {
 	contentCache, err = lru.New(n)
 	return err
 }
+
+// ContentCacheLength returns the number of cached entries
+func ContentCacheLength() int {
+	if contentCache != nil {
+		return contentCache.Len()
+	}
+	return 0
+}
