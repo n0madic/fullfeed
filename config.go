@@ -1,5 +1,17 @@
 package fullfeed
 
+// ExtractMethod for full text
+type ExtractMethod string
+
+var (
+	// QueryMethod with goquery
+	QueryMethod ExtractMethod = "query"
+	// ReadabilityMethod by default
+	ReadabilityMethod ExtractMethod = "readability"
+	// XPathMethod with XML Path Language
+	XPathMethod ExtractMethod = "xpath"
+)
+
 // Config for feed
 type Config struct {
 	// Base URL for all relative URLs
@@ -24,15 +36,15 @@ type Config struct {
 		Titles []string `json:"titles" yaml:"titles"`
 	} `json:"filters" yaml:"filters"`
 
-	// Maximum number of processing workers
+	// Maximum number of processing workers (default 10)
 	MaxWorkers uint `json:"max_workers" yaml:"max_workers"`
 
 	// Full text extract method
 	// Supported Methods: query (like jquery), xpath, readability (default)
-	Method string `json:"method" yaml:"method"`
+	Method ExtractMethod `json:"method" yaml:"method"`
 
-	// Full text extract option
-	MethodQuery string `json:"method_query" yaml:"method_query"`
+	// Full text extract request
+	MethodRequest string `json:"method_request" yaml:"method_request"`
 
 	// Link to the original feed
 	URL string `json:"url" yaml:"url"`

@@ -8,9 +8,9 @@ Convert partial feed to full-text feed with golang
 import "github.com/n0madic/fullfeed"
 
 feed, errors := fullfeed.GetFullFeed(fullfeed.Config{
-    Method:      "query",
-    MethodQuery: ".article",
-    URL:         "https://blog.golang.org/feed.atom",
+    Method:        fullfeed.QueryMethod,
+    MethodRequest: ".article",
+    URL:           "https://blog.golang.org/feed.atom",
 })
 
 if len(errors) > 0 {

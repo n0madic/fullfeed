@@ -69,19 +69,23 @@ func GetFullContent(config Config, link string) (fullContent string, err error) 
 		return "", err
 	}
 
-	switch strings.ToLower(config.Method) {
-	case "query":
+	if config.Method != ReadabilityMethod && config.Method != "" && config.MethodRequest == "" {
+		return "", fmt.Errorf("method request required")
+	}
+
+	switch config.Method {
+	case QueryMethod:
 		doc, err := goquery.NewDocumentFromReader(content)
 		if err == nil {
-			html, err := doc.Find(config.MethodQuery).Html()
+			html, err := doc.Find(config.MethodRequest).Html()
 			if err == nil {
 				fullContent = html
 			}
 		}
-	case "xpath":
+	case XPathMethod:
 		doc, err := htmlquery.Parse(content)
 		if err == nil {
-			list := htmlquery.Find(doc, config.MethodQuery)
+			list := htmlquery.Find(doc, config.MethodRequest)
 			if len(list) > 0 {
 				var b bytes.Buffer
 				err = html.Render(&b, list[0])
