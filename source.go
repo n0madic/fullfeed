@@ -1,6 +1,8 @@
 package fullfeed
 
 import (
+	"time"
+
 	"github.com/gorilla/feeds"
 	"github.com/mmcdole/gofeed"
 )
@@ -63,12 +65,23 @@ func LoadSourceFeed(config Config) (feed *feeds.Feed, err error) {
 				}
 			}
 
+			var created time.Time
+			if item.PublishedParsed != nil {
+				created = *item.PublishedParsed
+			}
+
+			var updated time.Time
+			if item.UpdatedParsed != nil {
+				updated = *item.UpdatedParsed
+			}
+
 			feed.Add(&feeds.Item{
 				Title:       item.Title,
 				Link:        &feeds.Link{Href: item.Link},
 				Id:          item.Link,
 				Author:      author,
-				Created:     *item.PublishedParsed,
+				Created:     created,
+				Updated:     updated,
 				Description: item.Description,
 				Enclosure:   enclosure,
 			})
