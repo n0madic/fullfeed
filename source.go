@@ -25,8 +25,12 @@ func LoadSourceFeed(config Config) (feed *feeds.Feed, err error) {
 		feed.Description = config.Description
 	}
 
-	if sourceFeed.PublishedParsed != nil {
+	if sourceFeed.PublishedParsed != nil && !sourceFeed.PublishedParsed.IsZero() {
 		feed.Created = *sourceFeed.PublishedParsed
+	}
+
+	if sourceFeed.UpdatedParsed != nil && !sourceFeed.UpdatedParsed.IsZero() {
+		feed.Updated = *sourceFeed.UpdatedParsed
 	}
 
 	if sourceFeed.Author != nil {
@@ -66,12 +70,12 @@ func LoadSourceFeed(config Config) (feed *feeds.Feed, err error) {
 			}
 
 			var created time.Time
-			if item.PublishedParsed != nil {
+			if item.PublishedParsed != nil && !item.PublishedParsed.IsZero() {
 				created = *item.PublishedParsed
 			}
 
 			var updated time.Time
-			if item.UpdatedParsed != nil {
+			if item.UpdatedParsed != nil && !item.UpdatedParsed.IsZero() {
 				updated = *item.UpdatedParsed
 			}
 
