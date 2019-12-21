@@ -58,6 +58,7 @@ func GetFullFeed(config Config) (feed *feeds.Feed, errors []error) {
 
 // GetFullContent for the specified link
 func GetFullContent(config Config, link string) (fullContent string, err error) {
+	defer func() { recover() }()
 	content, err := GetURL(link)
 	if err != nil {
 		return "", err
