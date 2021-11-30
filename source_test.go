@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"./test"
+	"github.com/n0madic/fullfeed/test"
 )
 
 func TestLoadSourceFeed(t *testing.T) {
@@ -42,10 +42,10 @@ func TestLoadSourceFeed(t *testing.T) {
 		t.Errorf("Expect created time '%s', got '%s'", time.Now().UTC().Truncate(time.Minute), feed.Created)
 	}
 
-	if diff := test.Diff(test.Feed.Author, feed.Author); diff != nil {
+	if diff := test.Diff(test.Feed.Author, feed.Author); diff != "" {
 		t.Error(diff)
 	}
-	if diff := test.Diff(test.Feed.Image, feed.Image); diff != nil {
+	if diff := test.Diff(test.Feed.Image, feed.Image); diff != "" {
 		t.Error(diff)
 	}
 
@@ -57,7 +57,7 @@ func TestLoadSourceFeed(t *testing.T) {
 	if feed.Updated.IsZero() {
 		t.Errorf("Expect updated time '%s', got '%s'", time.Now().UTC().Truncate(time.Minute), feed.Updated)
 	}
-	if diff := test.Diff(test.Feed.Items, feed.Items); diff != nil {
+	if diff := test.Diff(test.Feed.Items, feed.Items); diff != "" {
 		t.Error(diff)
 	}
 

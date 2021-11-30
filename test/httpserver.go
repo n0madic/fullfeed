@@ -17,7 +17,7 @@ func RunTestHTTPServer(addr string) {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Fprintf(w, atom)
+		fmt.Fprint(w, atom)
 	})
 
 	http.HandleFunc("/rss", func(w http.ResponseWriter, r *http.Request) {
@@ -26,7 +26,7 @@ func RunTestHTTPServer(addr string) {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Fprintf(w, rss)
+		fmt.Fprint(w, rss)
 	})
 
 	panic(http.ListenAndServe(addr, nil))

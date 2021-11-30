@@ -20,7 +20,7 @@ var Feed = &feeds.Feed{
 		Url:   "test",
 		Title: "test",
 	},
-	Items: []*feeds.Item{&feeds.Item{
+	Items: []*feeds.Item{{
 		Title:       "test",
 		Link:        &feeds.Link{Href: "http://localhost/test-page"},
 		Id:          "http://localhost/test-page",
@@ -29,6 +29,7 @@ var Feed = &feeds.Feed{
 			Name:  "test",
 			Email: "test@localhost",
 		},
+		Created: time.Now().UTC().Truncate(time.Minute),
 		Updated: time.Now().UTC().Truncate(time.Minute),
 		Enclosure: &feeds.Enclosure{
 			Url:    "test",

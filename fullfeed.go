@@ -98,7 +98,7 @@ func GetFullContent(config Config, link string) (fullContent string, err error) 
 			}
 		}
 	default:
-		doc, err := readability.FromReader(content, baseURL.String())
+		doc, err := readability.FromReader(content, baseURL)
 		if err == nil {
 			fullContent = doc.Content
 		}
