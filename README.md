@@ -1,5 +1,7 @@
 # fullfeed
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/n0madic/fullfeed.svg)](https://pkg.go.dev/github.com/n0madic/fullfeed)
+
 Convert partial feed to full-text feed with golang
 
 ## Usage
