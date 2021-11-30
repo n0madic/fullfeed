@@ -11,6 +11,9 @@ import (
 	"golang.org/x/net/html/charset"
 )
 
+// UserAgent header
+var UserAgent string = "fullfeed/1.0"
+
 // GetURL return content from internet or cache
 func GetURL(url string) (io.Reader, error) {
 	if contentCache != nil {
@@ -25,7 +28,7 @@ func GetURL(url string) (io.Reader, error) {
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err == nil {
-		req.Header.Add("User-Agent", "FullRSS proxy")
+		req.Header.Add("User-Agent", UserAgent)
 
 		res, err := client.Do(req)
 		if err == nil {
