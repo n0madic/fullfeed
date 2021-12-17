@@ -8,6 +8,18 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+func TestFixLazyImage(t *testing.T) {
+	html := `<img src="data:image/svg+xml;base64,FooBar" data-src="http://www.example.com/image.png"/>`
+	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(html))
+	fixLazyImage(doc)
+	doc.Find("img").Each(func(i int, sel *goquery.Selection) {
+		src := sel.AttrOr("src", "")
+		if src != "http://www.example.com/image.png" {
+			t.Errorf("Lazy image not fixed, got \"%s\"", src)
+		}
+	})
+}
+
 func TestMakeAllLinksAbsolute(t *testing.T) {
 	html := `<a href="index.html"><img src="image.png" data-src="image.png"/></a>`
 	baseURL, _ := url.Parse("http://www.example.com")

@@ -124,6 +124,7 @@ func GetFullContent(config Config, link string) (fullContent string, err error) 
 			doc.Find(strings.Join(searchText, ", ")).Remove()
 		}
 
+		fixLazyImage(doc)
 		makeAllLinksAbsolute(baseURL, doc)
 
 		fullContent, err = doc.Html()

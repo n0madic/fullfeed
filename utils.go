@@ -16,6 +16,16 @@ func absoluteAttr(base *url.URL, sel *goquery.Selection, attr string) {
 	}
 }
 
+func fixLazyImage(doc *goquery.Document) {
+	doc.Find("img").Each(func(i int, sel *goquery.Selection) {
+		if strings.HasPrefix(sel.AttrOr("src", ""), "data:") {
+			if val, exists := sel.Attr("data-src"); exists && val != "" {
+				sel.SetAttr("src", val)
+			}
+		}
+	})
+}
+
 func makeAllLinksAbsolute(base *url.URL, doc *goquery.Document) {
 	doc.Find("a,img").Each(func(i int, sel *goquery.Selection) {
 		absoluteAttr(base, sel, "src")
