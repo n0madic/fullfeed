@@ -13,5 +13,5 @@ require (
 	github.com/tdewolff/minify v2.3.6+incompatible
 	github.com/tdewolff/parse v2.3.4+incompatible // indirect
 	github.com/tdewolff/test v1.0.9 // indirect
-	golang.org/x/net v0.10.0
+	golang.org/x/net v0.17.0
 )
