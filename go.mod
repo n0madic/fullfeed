@@ -11,7 +11,7 @@ require (
 	github.com/hashicorp/golang-lru v1.0.2
 	github.com/mmcdole/gofeed v1.3.0
 	github.com/tdewolff/minify v2.3.6+incompatible
-	golang.org/x/net v0.37.0
+	golang.org/x/net v0.38.0
 )
 
 require (
